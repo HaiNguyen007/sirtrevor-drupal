@@ -1,0 +1,7 @@
+name=Sir Trevor
+description=Text editor for the modern web.
+core=7.x
+
+dependencies[]=libraries
+dependencies[]=field
+dependencies[]=markdown

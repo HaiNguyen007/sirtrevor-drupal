@@ -1,0 +1,124 @@
+<?php
+
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'sir_trevor') . '/sir_trevor.field.inc';
+
+/**
+ * Implements hook_libraries_info().
+ *
+ * For defining external libraries.
+ */
+function sir_trevor_libraries_info() {
+  $libraries['sir-trevor'] = array(
+    'name' => 'Sir Trevor',
+    'vendor url' => 'http://madebymany.github.io/sir-trevor-js/',
+    'download url' => 'https://github.com/madebymany/sir-trevor-js/archive/master.zip',
+    'version arguments' => array(
+      'file' => 'package.json',
+      'pattern' => '/"version": "([0-9a-zA-Z\.-]+)"/',
+      'lines' => 5,
+    ),
+    'files' => array(
+      'js' => array('sir-trevor.js'),
+      'css' => array('sir-trevor.css', 'sir-trevor-icons.css')
+    ),
+  );
+  $libraries['eventable'] = array(
+    'name' => 'Eventable',
+    'vendor url' => 'http://madebymany.github.io',
+    'download url' => 'https://github.com/madebymany/eventable',
+    'version arguments' => array(
+      'file' => 'package.json',
+      'pattern' => '/"version": "([0-9a-zA-Z\.-]+)"/',
+      'lines' => 5,
+    ),
+    'files' => array(
+      'js' => array('eventable.js')
+    ),
+  );
+  $libraries['underscore'] = array(
+    'name' => 'Underscore',
+    'vendor url' => 'http://underscorejs.org',
+    'download url' => 'https://underscorejs.org',
+    'version arguments' => array(
+      'file' => 'underscore.js',
+      'pattern' => '/Underscore\.js ([0-9a-zA-Z\.-]+)/',
+      'lines' => 5,
+    ),
+    'files' => array(
+      'js' => array('underscore.js')
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Implements hook_sir_trevor_block_info().
+ */
+function sir_trevor_sir_trevor_block_info() {
+  return array(
+    'text' => array(
+      'sir_trevor_name' => 'Text',
+      'name' => t('Text'),
+      'markdown' => TRUE
+    ),
+    'heading' => array(
+      'sir_trevor_name' => 'Heading',
+      'name' => t('Heading'),
+      'markdown' => TRUE
+    ),
+    'quote' => array(
+      'sir_trevor_name' => 'Quote',
+      'name' => t('Quote'),
+      'markdown' => TRUE
+    ),
+    'image' => array(
+      'sir_trevor_name' => 'Image',
+      'name' => t('Image')
+    ),
+    'tweet' => array(
+      'sir_trevor_name' => 'Tweet',
+      'name' => t('Tweet')
+    ),
+    'unordered_list' => array(
+      'sir_trevor_name' => 'List',
+      'name' => t('Unordered list'),
+      'markdown' => TRUE
+    ),
+    'video' => array(
+      'sir_trevor_name' => 'Video',
+      'name' => t('Video')
+    )
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sir_trevor_theme() {
+  $blocks = sir_trevor_sir_trevor_block_info();
+  $theme = array();
+  foreach($blocks as $block_name => $block) {
+    $markdown = (isset($block['markdown'])) ? $block['markdown'] : FALSE;
+    $theme['sir_trevor_' . $block_name] = array(
+      'variables' => array('sir_trevor_block' => TRUE,
+                           'settings' => array(),
+                           'data' => array(),
+                           'markdown' => $markdown
+                         ),
+      'template' => 'sir_trevor_' . $block_name,
+      'path' => drupal_get_path('module', 'sir_trevor') .'/theme'
+    );
+  }
+  return $theme;
+}
+
+/**
+ * Preprocess text blocks to convert from markdown.
+ */
+function sir_trevor_preprocess(&$variables, $hook) {
+  if(!isset($variables['sir_trevor_block']) || !$variables['markdown'] || !$variables['data']->text) {
+    return;
+  }
+  module_load_include('php', 'markdown', 'markdown');
+  $variables['data']->text = Markdown($variables['data']->text);
+}

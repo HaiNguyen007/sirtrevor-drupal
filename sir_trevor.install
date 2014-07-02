@@ -1,0 +1,11 @@
+<?php
+
+function sir_trevor_field_schema($field) {
+  if ($field['type'] == 'sir_trevor') {
+    return array(
+      'columns' => array(
+        'json' => array('type' => 'text', 'size' => 'big'),
+      ),
+    );
+  }
+}
