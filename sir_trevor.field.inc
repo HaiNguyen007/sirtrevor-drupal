@@ -106,10 +106,7 @@ function sir_trevor_field_formatter_view($entity_type, $entity, $field, $instanc
  * Implements hook_field_widget_form().
  */
 function sir_trevor_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
-  drupal_add_js(drupal_get_path('module', 'sir_trevor') .'/sir_trevor.js');
-  libraries_load('underscore');
-  libraries_load('eventable');
-  libraries_load('sir-trevor');
+  module_invoke_all('sir_trevor_loading');
   $blocks = module_invoke_all('sir_trevor_block_info');
   $settings = array('blocks' => array(),
     'default' => $blocks[$field['settings']['sir_trevor_default_block']]['sir_trevor_name']);

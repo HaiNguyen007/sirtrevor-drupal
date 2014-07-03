@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Implements hook_libraries_info().
+ */
+function sir_trevor_ordered_list_libraries_info() {
+  $libraries['sir-trevor-blocks-list'] = array(
+    'name' => 'Sir Trevor Ordered List',
+    'vendor url' => 'http://madebymany.github.io/sir-trevor-js/',
+    'download url' => 'https://github.com/madebymany/sir-trevor-blocks',
+    'files' => array(
+      'js' => array('src/ordered-list.js')
+    ),
+  );
+  return $libraries;
+}
+
+function sir_trevor_ordered_list_sir_trevor_block_info() {
+  $blocks = array(
+    'ordered_list' => array(
+      'sir_trevor_name' => 'OrderedList',
+      'name' => t('Ordered List'),
+      'markdown' => TRUE
+    ),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sir_trevor_ordered_list_theme() {
+  return array(
+    'sir_trevor_ordered_list' => array(
+      'variables' => array('sir_trevor_block' => TRUE,
+                           'settings' => array(),
+                           'data' => array(),
+                           'markdown' => TRUE
+                         ),
+      'template' => 'sir_trevor_ordered_list',
+      'path' => drupal_get_path('module', 'sir_trevor_ordered_list') .'/theme'
+    )
+  );
+}
+
+/**
+ * Implements hook_sir_trevor_loading().
+ */
+function sir_trevor_ordered_list_sir_trevor_loading() {
+  drupal_add_js(drupal_get_path('module', 'sir_trevor_ordered_list') .'/ordered-list.js');
+}

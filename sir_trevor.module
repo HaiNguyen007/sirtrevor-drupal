@@ -31,10 +31,9 @@ function sir_trevor_menu() {
 
   return $items;
 }
+
 /**
  * Implements hook_libraries_info().
- *
- * For defining external libraries.
  */
 function sir_trevor_libraries_info() {
   $libraries['sir-trevor'] = array(
@@ -155,4 +154,15 @@ function sir_trevor_preprocess(&$variables, $hook) {
   }
   module_load_include('php', 'markdown', 'markdown');
   $variables['data']->text = Markdown($variables['data']->text);
+}
+
+/**
+ * Implements hook_sir_trevor_loading().
+ */
+function sir_trevor_sir_trevor_loading() {
+  drupal_add_js(drupal_get_path('module', 'sir_trevor') .'/sir_trevor.js');
+  drupal_add_css(drupal_get_path('module', 'sir_trevor') .'/sir_trevor.css');
+  libraries_load('underscore');
+  libraries_load('eventable');
+  libraries_load('sir-trevor');
 }
