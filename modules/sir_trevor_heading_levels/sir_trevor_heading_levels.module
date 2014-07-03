@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_sir_trevor_block_info().
+ */
+function sir_trevor_heading_levels_sir_trevor_block_info() {
+  $blocks = array(
+    'heading_levels' => array(
+      'sir_trevor_name' => 'HeadingLevels',
+      'type' => 'heading_levels',
+      'name' => t('Heading Levels')
+    ),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sir_trevor_heading_levels_theme() {
+  return array(
+    'sir_trevor_heading_levels' => array(
+      'variables' => array('sir_trevor_block' => TRUE,
+                           'settings' => array(),
+                           'data' => array(),
+                           'markdown' => TRUE
+                         ),
+      'template' => 'sir_trevor_heading_levels',
+      'path' => drupal_get_path('module', 'sir_trevor_heading_levels') .'/theme'
+    )
+  );
+}
+
+/**
+ * Implements hook_sir_trevor_loading().
+ */
+function sir_trevor_heading_levels_sir_trevor_loading() {
+  drupal_add_js(drupal_get_path('module', 'sir_trevor_heading_levels') .'/heading-levels.js');
+  drupal_add_css(drupal_get_path('module', 'sir_trevor_heading_levels') .'/heading-levels.css');
+
+}
