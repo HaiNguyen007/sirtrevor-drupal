@@ -21,7 +21,6 @@ function sir_trevor_image() {
   $image = $_POST['attachment'];
   $filename = variable_get('sir_trevor_image_upload', '') .'/'. $image['uid'] . '-' . $image['name'];
   file_prepare_directory(variable_get('sir_trevor_image_upload', ''), FILE_CREATE_DIRECTORY);
-  dpm($_FILES['attachment']['tmp_name']);
   file_unmanaged_move($_FILES['attachment']['tmp_name']['file'], $filename);
   drupal_json_output(array(
     'file' => array(

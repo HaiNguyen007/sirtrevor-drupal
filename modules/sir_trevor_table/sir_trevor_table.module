@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * Implements hook_sir_trevor_block_info().
+ */
+function sir_trevor_table_sir_trevor_block_info() {
+  $blocks = array(
+    'table' => array(
+      'sir_trevor_name' => 'Table',
+      'type' => 'table',
+      'name' => t('Table')
+    ),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sir_trevor_table_theme() {
+  return array(
+    'sir_trevor_table' => array(
+      'variables' => array('sir_trevor_block' => TRUE,
+                           'settings' => array(),
+                           'data' => array(),
+                           'markdown' => TRUE
+                         ),
+      'template' => 'sir_trevor_table',
+      'path' => drupal_get_path('module', 'sir_trevor_table') .'/theme'
+    )
+  );
+}
+
+/**
+ * Implements hook_sir_trevor_loading().
+ */
+function sir_trevor_table_sir_trevor_loading() {
+  drupal_add_js(drupal_get_path('module', 'sir_trevor_table') .'/table.js');
+  drupal_add_css(drupal_get_path('module', 'sir_trevor_table') .'/table.css');
+}

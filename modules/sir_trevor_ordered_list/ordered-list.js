@@ -1,7 +1,7 @@
 /*
   Ordered List
 */
-
+(function($) {
 SirTrevor.Blocks.OrderedList = (function() {
 
   var template = '<div class="st-text-block" contenteditable="true"><ol><li></li></ol></div>';
@@ -54,3 +54,4 @@ SirTrevor.Blocks.OrderedList = (function() {
   });
 
 })();
+})(jQuery);

@@ -1,0 +1,8 @@
+.st-block-control-ui-btn:before {
+  font-family: "Helvetica neue", Arial, Helvetica, sans-serif !important;
+}
+
+.st-block-control-ui-btn {
+  width: auto;
+  padding: 5px 10px;
+}

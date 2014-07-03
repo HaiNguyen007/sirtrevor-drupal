@@ -1,0 +1,5 @@
+name=Sir Trevor Table
+package=Sir Trevor
+core=7.x
+
+dependencies[] = sir_trevor
