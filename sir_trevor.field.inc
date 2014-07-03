@@ -84,7 +84,7 @@ function sir_trevor_field_formatter_view($entity_type, $entity, $field, $instanc
   $blocks = module_invoke_all('sir_trevor_block_info');
   $sir_trevor_blocks = array();
   foreach($blocks as $block_name => $block) {
-    $sir_trevor_blocks[strtolower($block['sir_trevor_name'])] = $block_name;
+    $sir_trevor_blocks[$block['type']] = $block_name;
   }
   $settings = $field['settings'];
   foreach($items as $delta => $item) {

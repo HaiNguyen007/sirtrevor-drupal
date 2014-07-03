@@ -1,26 +1,15 @@
 <?php
 
 /**
- * Implements hook_libraries_info().
+ * Implements hook_sir_trevor_block_info().
  */
-function sir_trevor_ordered_list_libraries_info() {
-  $libraries['sir-trevor-blocks-list'] = array(
-    'name' => 'Sir Trevor Ordered List',
-    'vendor url' => 'http://madebymany.github.io/sir-trevor-js/',
-    'download url' => 'https://github.com/madebymany/sir-trevor-blocks',
-    'files' => array(
-      'js' => array('src/ordered-list.js')
-    ),
-  );
-  return $libraries;
-}
-
 function sir_trevor_ordered_list_sir_trevor_block_info() {
   $blocks = array(
     'ordered_list' => array(
       'sir_trevor_name' => 'OrderedList',
+      'type' => 'ordered_list',
       'name' => t('Ordered List'),
-      'markdown' => TRUE
+      'markdown' => TRUE,
     ),
   );
   return $blocks;

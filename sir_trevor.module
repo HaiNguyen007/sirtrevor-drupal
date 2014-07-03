@@ -86,30 +86,36 @@ function sir_trevor_sir_trevor_block_info() {
   $blocks = array(
     'text' => array(
       'sir_trevor_name' => 'Text',
+      'type' => 'text',
       'name' => t('Text'),
       'markdown' => TRUE
     ),
     'heading' => array(
       'sir_trevor_name' => 'Heading',
+      'type' => 'heading',
       'name' => t('Heading'),
       'markdown' => TRUE
     ),
     'quote' => array(
       'sir_trevor_name' => 'Quote',
+      'type' => 'quote',
       'name' => t('Quote'),
       'markdown' => TRUE
     ),
     'image' => array(
       'sir_trevor_name' => 'Image',
+      'type' => 'image',
       'name' => t('Image')
     ),
     'unordered_list' => array(
       'sir_trevor_name' => 'List',
+      'type' => 'list',
       'name' => t('Unordered list'),
       'markdown' => TRUE
     ),
     'video' => array(
       'sir_trevor_name' => 'Video',
+      'type' => 'video',
       'name' => t('Video')
     )
   );
@@ -117,7 +123,8 @@ function sir_trevor_sir_trevor_block_info() {
   if(module_exists('twitter')) {
     $blocks['tweet'] = array(
       'sir_trevor_name' => 'Tweet',
-      'name' => t('Tweet')
+      'type' => 'tweet',
+      'name' => t('Tweet'),
     );
   }
 
