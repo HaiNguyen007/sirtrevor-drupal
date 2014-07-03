@@ -57,6 +57,7 @@ function sir_trevor_field_settings_form($field, $instance, $has_data) {
     '#options' => $blocks,
     '#description' => t('The default block type created.'),
   );
+
   return $form;
 }
 

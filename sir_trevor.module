@@ -2,6 +2,35 @@
 
 require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'sir_trevor') . '/sir_trevor.field.inc';
 
+
+/**
+ * Implements hook_menu().
+ */
+function sir_trevor_menu() {
+  $items = array();
+
+  $items['sir-trevor/tweet'] = array(
+    'page callback' => 'sir_trevor_tweet',
+    'access arguments' => array('access content'),
+    'file' => 'sir_trevor.pages.inc'
+  );
+
+  $items['sir-trevor/image'] = array(
+    'page callback' => 'sir_trevor_image',
+    'access arguments' => array('access content'),
+    'file' => 'sir_trevor.pages.inc'
+  );
+
+  $items['admin/config/content/sir-trevor'] = array(
+    'title' => 'Sir Trevor',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('sir_trevor_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'sir_trevor.pages.inc'
+  );
+
+  return $items;
+}
 /**
  * Implements hook_libraries_info().
  *
@@ -55,7 +84,7 @@ function sir_trevor_libraries_info() {
  * Implements hook_sir_trevor_block_info().
  */
 function sir_trevor_sir_trevor_block_info() {
-  return array(
+  $blocks = array(
     'text' => array(
       'sir_trevor_name' => 'Text',
       'name' => t('Text'),
@@ -75,10 +104,6 @@ function sir_trevor_sir_trevor_block_info() {
       'sir_trevor_name' => 'Image',
       'name' => t('Image')
     ),
-    'tweet' => array(
-      'sir_trevor_name' => 'Tweet',
-      'name' => t('Tweet')
-    ),
     'unordered_list' => array(
       'sir_trevor_name' => 'List',
       'name' => t('Unordered list'),
@@ -89,6 +114,15 @@ function sir_trevor_sir_trevor_block_info() {
       'name' => t('Video')
     )
   );
+
+  if(module_exists('twitter')) {
+    $blocks['tweet'] = array(
+      'sir_trevor_name' => 'Tweet',
+      'name' => t('Tweet')
+    );
+  }
+
+  return $blocks;
 }
 
 /**
