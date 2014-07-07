@@ -6,3 +6,12 @@
   width: auto;
   padding: 5px 10px;
 }
+
+.st-text-block table, .st-text-block table th, .st-text-block table td {
+  border: 1px solid #bebfb9 !important;
+}
+
+.st-text-block table th {
+  font-weight: bold;
+  background: #e1e2dc;
+}
