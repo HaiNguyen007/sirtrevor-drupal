@@ -23,13 +23,13 @@
       },
 
       loadData: function(data){
-        var level = data.text.match(/\#/g).join('');
+        var level = data.text.match(/\#/g);
+        level = (level) ? level.join('') : '##';
         this.getTextBlock().parents().find('select').val(level);
-        this.getTextBlock().html(SirTrevor.toHTML(data.text.replace(/^(\#|\s)+/, ''), this.type));
-      },
-
-      toMarkdown: function(markdown) {
-        return $(this.editorHTML).find('select').val() + ' ' + markdown.replace(/^(\#|\s)+/, '');
+        this.getTextBlock().html('<span class="heading-level element-invisible">' + level + '</span>' + SirTrevor.toHTML(data.text.replace(/^(\#|\s)+/, ''), this.type));
+        this.getTextBlock().parents().find('select').on('change', function() {
+          $(this).parents().find('.heading-level').html($(this).val());
+        });
       }
     });
   })();

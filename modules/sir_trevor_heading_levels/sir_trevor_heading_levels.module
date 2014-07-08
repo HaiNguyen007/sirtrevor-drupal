@@ -37,5 +37,14 @@ function sir_trevor_heading_levels_theme() {
 function sir_trevor_heading_levels_sir_trevor_loading() {
   drupal_add_js(drupal_get_path('module', 'sir_trevor_heading_levels') .'/heading-levels.js');
   drupal_add_css(drupal_get_path('module', 'sir_trevor_heading_levels') .'/heading-levels.css');
+}
 
+/**
+ * Auto-append an ID to each heading.
+ */
+function sir_trevor_heading_levels_preprocess_sir_trevor_heading_levels(&$variables) {
+  if(module_exists('pathauto')) {
+    module_load_include('inc', 'pathauto');
+    $variables['data']->name = pathauto_cleanstring($variables['data']->text);
+  }
 }
